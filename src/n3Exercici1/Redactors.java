@@ -19,22 +19,9 @@ public class Redactors {
 
 	}
 
-	// getters & setters
-	// public String getNom() {
-	// return nom;
-	// }
-
-	// public void setNom(String nom) {
-	// this.nom = nom;
-	// }
-
 	public String getDni() {
 		return dni;
 	}
-
-	// public ArrayList<Noticies> getListaNoticies() {
-	// return listaNoticies;
-	// }
 
 	// metodos de clase
 	static Redactors crearRedactor(String nom, String dni) {
