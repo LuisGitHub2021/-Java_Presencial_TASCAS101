@@ -2,9 +2,8 @@ package n3Exercici1;
 
 import java.util.Scanner;
 
-public class PideDatos {
+public class Gestor {
 
-	// PEDIR DATOS
 	static int pideInt(String txt) {
 
 		Scanner sc = new Scanner(System.in);
@@ -34,7 +33,6 @@ public class PideDatos {
 
 	}
 
-	// MENSAJES
 	static void pideMensaje(String txt) {
 		System.out.println(txt);
 	}

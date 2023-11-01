@@ -1,35 +1,36 @@
 package n3Exercici1;
 
+import java.util.ArrayList;
+
 public class NoticiesTenis extends Noticies {
 
-	static final int PREU_INIT = 150;
-	final int PREU_JUGADORS = 100;
-	static final int PT_INIT = 4;
-	final int PT_JUGADORS = 3;
 	private String jugadors;
+	private ValoresFinales vf = new ValoresFinales();
 
-	// constructor
 	protected NoticiesTenis(Redactors redactor, String titular, String jugadors) {
 		super(redactor, titular);
 		this.jugadors = jugadors;
 	}
 
-	// metodos de clase
-	static NoticiesTenis crearNoticiesTenis(Redactors redactor, String titular, String jugadors) {
-
-		return new NoticiesTenis(redactor, titular, jugadors);
-
+	static void crearNoticiesTenis(Redactors redactor, ArrayList<Redactors> listaRedactors,
+			ArrayList<Noticies> listaNoticies) {
+		String titular = Gestor.pideString("Titular");
+		if (NoticiesTenis.coincideTitular(titular, listaNoticies)) {
+			String jugadors = Gestor.pideString("Jugadors");
+			NoticiesTenis noticiaTenis = new NoticiesTenis(redactor, titular, jugadors);
+			NoticiesTenis.añadirNoticiasTenis(noticiaTenis, redactor, listaNoticies);
+		}
 	}
 
 	public int calcularPunts() {
 
 		puntuacio = 0;
-		puntuacio = super.calcularPunts() + PT_INIT;
+		puntuacio = ValoresFinales.PT_INIT;
 
 		if (jugadors.equalsIgnoreCase("Federer") || jugadors.equalsIgnoreCase("Nadal")
 				|| jugadors.equalsIgnoreCase("Djokovic")) {
 
-			puntuacio += PT_JUGADORS;
+			puntuacio += vf.PT_JUGADORS;
 		}
 
 		return puntuacio;
@@ -38,21 +39,36 @@ public class NoticiesTenis extends Noticies {
 	public int calcularPreu() {
 
 		preu = 0;
-		preu = super.calcularPreu() + PREU_INIT;
+		preu = ValoresFinales.PREU_INIT;
 
 		if (jugadors.equalsIgnoreCase("Federer") || jugadors.equalsIgnoreCase("Nadal")
 				|| jugadors.equalsIgnoreCase("Djokovic")) {
 
-			preu += PREU_JUGADORS;
+			preu += vf.PREU_JUGADORS;
 		}
 
 		return preu;
 	}
 
-	// sobrescritos
+	private static void añadirNoticiasTenis(NoticiesTenis noticiaTenis, Redactors redactor,
+			ArrayList<Noticies> listaNoticies) {
+		redactor.getListaNoticies().add(noticiaTenis);
+		listaNoticies.add(noticiaTenis);
+		System.out.println("Perfecto. Noticia creada correctamente. Gracias!");
+
+	}
+
 	@Override
 	public String toString() {
 		return "NoticiesTenis [redactor dni=" + redactor.getDni() + ", titular=" + titular + ", jugadors=" + jugadors
 				+ "]";
+	}
+
+	private class ValoresFinales {
+		static final int PREU_INIT = 150;
+		final int PREU_JUGADORS = 100;
+		static final int PT_INIT = 4;
+		final int PT_JUGADORS = 3;
+
 	}
 }
